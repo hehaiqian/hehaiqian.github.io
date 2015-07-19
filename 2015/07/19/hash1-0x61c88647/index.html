@@ -3,17 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015/7 | Haiqian He</title>
+  <title>Hash1——为什么是0x61c88647 | Haiqian He</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Hexo theme - Icarus">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Haiqian He">
-<meta property="og:url" content="http://hehaiqian.com/archives/2015/07/index.html">
+  <meta name="description" content="在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647。假设存放线程变量的hash表长度为M（通常$M＝2^N$），第K个线程变量在表的位置＝K ＊0x61c88647 ％ M。经过简单地验证，这个hash函数冲突率很低、计算速度很快。本文致力于揭开0x61c88647的神秘面纱。
+Hash作为查找方法的一种，hash就是通过对变元K进行某种算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hash1——为什么是0x61c88647">
+<meta property="og:url" content="http://hehaiqian.com/2015/07/19/hash1-0x61c88647/index.html">
 <meta property="og:site_name" content="Haiqian He">
-<meta property="og:description" content="Hexo theme - Icarus">
+<meta property="og:description" content="在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647。假设存放线程变量的hash表长度为M（通常$M＝2^N$），第K个线程变量在表的位置＝K ＊0x61c88647 ％ M。经过简单地验证，这个hash函数冲突率很低、计算速度很快。本文致力于揭开0x61c88647的神秘面纱。
+Hash作为查找方法的一种，hash就是通过对变元K进行某种算">
+<meta property="og:image" content="http://7xkbqw.com1.z0.glb.clouddn.com/IMG_0324.JPG">
+<meta property="og:updated_time" content="2015-07-19T07:25:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Haiqian He">
-<meta name="twitter:description" content="Hexo theme - Icarus">
+<meta name="twitter:title" content="Hash1——为什么是0x61c88647">
+<meta name="twitter:description" content="在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647。假设存放线程变量的hash表长度为M（通常$M＝2^N$），第K个线程变量在表的位置＝K ＊0x61c88647 ％ M。经过简单地验证，这个hash函数冲突率很低、计算速度很快。本文致力于揭开0x61c88647的神秘面纱。
+Hash作为查找方法的一种，hash就是通过对变元K进行某种算">
   
   
     <link rel="icon" href="favicon.png">
@@ -116,79 +121,84 @@
   </div>
 </aside>
       
-      <section id="main">
-      <div class="archive-year-wrap">
-        <a href="/archives/2015" class="archive-year">2015</a>
-      </div>
-      <section class="archives-wrap">
-        <div class="archives">
+      <section id="main"><article id="post-hash1-0x61c88647" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
     
-    <div class="archive-article-thumbnail">
-      <a href="/2015/07/19/hash1-0x61c88647/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xkbqw.com1.z0.glb.clouddn.com/IMG_0324.JPG
-)" alt="Hash1——为什么是0x61c88647" class="thumbnail-image"></span>
-  
-</a>
-    </div>
     
-    <header class="archive-article-header">
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/07/19/hash1-0x61c88647/">Hash1——为什么是0x61c88647</a>
+    <h1 class="article-title" itemprop="name">
+      Hash1——为什么是0x61c88647
     </h1>
   
 
-      
-        <div class="archive-article-date">
+        <div class="article-meta">
+          <div class="article-date">
   <i class="fa fa-calendar"></i>
   <a href="/2015/07/19/hash1-0x61c88647/">
-    <time datetime="2015-07-19T07:25:32.000Z" itemprop="datePublished">7月 19</time>
+    <time datetime="2015-07-19T07:25:32.000Z" itemprop="datePublished">2015-07-19</time>
   </a>
 </div>
-      
-    </header>
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Hashing/">Hashing</a>
   </div>
-</article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
+
+        </div>
+      </header>
     
-    <div class="archive-article-thumbnail">
-      <a href="/2015/07/19/K-means/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xkbqw.com1.z0.glb.clouddn.com/non_spherical-1.png
-)" alt="K-means问题总结" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/07/19/K-means/">K-means问题总结</a>
-    </h1>
-  
+        <p>在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647。假设存放线程变量的hash表长度为M（通常$M＝2^N$），第K个线程变量在表的位置＝K ＊0x61c88647 ％ M。经过简单地验证，这个hash函数冲突率很低、计算速度很快。本文致力于揭开0x61c88647的神秘面纱。</p>
+<h2 id="Hash">Hash</h2><p>作为查找方法的一种，hash就是通过对变元K进行某种算术运算，计算一个函数h(K)，定位K在表中的位置。最理想的hash函数是$h(k1) \neq h(k2)$，即不同变元K对应不同的位置，相互不冲突。但是，满足这种特征的hash函数非常稀少，我们举两个例子来说明：</p>
+<ol>
+<li><p>将31个元素的集合映射到41个元素的集合中有$41^{31} \approx 10^{50}$种可能的函数，但它们当中仅仅有$ 41 \times 40 \times … \times 11＝41!/10! \approx 10^{43}$个函数能对每一个变元给出不同的值。即大约一千万个函数当中仅仅有一个是适用的</p>
+</li>
+<li><p>生日悖论：在一个23个人的房间里，每个人生日都不重复的概率只有0.4927，即随机把23个变元映射到长度为365的一张表中，不冲突的概率要小于0.5</p>
+</li>
+</ol>
+<h2 id="Fibonacci-黄金比例">Fibonacci-黄金比例</h2><p>定义一个数值：$\phi^{-1} = (\sqrt{5}-1)/2 = 0.6180339887$<br>定义散列函数：$h(k) = \{k \times \phi^{-1}\}$，其中$\{x\}＝x - \lfloor x \rfloor$</p>
+<p>散列函数将整数空间散列到［0，1］空间。如下图所示，这些点被分得很开。事实上，每个新增加的点都落入最大的剩下的区间之一，并且按照黄金比例分割它们。(这个现象最先由J.Oderfeld猜测，并且由S.Swierczkowski证明，FundamentaMath. 46(1958), 187-189)。</p>
+<p><strong>定理</strong>：设$\theta$是任意无理数。当把点$\{\theta\},\{2\theta\},…,\{n\theta\}$放置在线段[0..1]中时，形成点n+1个线段至多有三种不同的长度，并且，下一点$\{(n+1)\theta\}$将落在最大的现存线段之一中。</p>
+<p><img src="http://7xkbqw.com1.z0.glb.clouddn.com/IMG_0324.JPG" alt=""></p>
+<h2 id="Conclusion">Conclusion</h2><p>在ThreadLocal函数中的HASH_INCREASE: $0x61c88647 = (\sqrt(5) - 1) / 2 \times * 2^{32}$，即将所有整数散列到范围[0, $2^{32}-1$]这个范围当中去。</p>
+<p>Reference: The Art of Computer Programming: Volume 3</p>
 
       
-        <div class="archive-article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/19/K-means/">
-    <time datetime="2015-07-19T06:21:37.000Z" itemprop="datePublished">7月 19</time>
-  </a>
-</div>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hehaiqian.com/2015/07/19/hash1-0x61c88647/" data-id="cica35e4g0003k7s6q59yl51n" class="article-share-link">分享到</a>
       
-    </header>
+        <a href="http://hehaiqian.com/2015/07/19/hash1-0x61c88647/#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+    </footer>
   </div>
-</article>
   
-    </div></section>
-  </section>
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/19/K-means/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">K-means问题总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
       
         <aside id="sidebar">
   
@@ -282,7 +292,7 @@
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>

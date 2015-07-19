@@ -92,7 +92,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        1
+        2
         <span>文章</span>
       </div>
       <div class="article-info-block">
@@ -117,6 +117,67 @@
 </aside>
       
       <section id="main">
+      <article id="post-hash1-0x61c88647" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/19/hash1-0x61c88647/">Hash1——为什么是0x61c88647</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/19/hash1-0x61c88647/">
+    <time datetime="2015-07-19T07:25:32.000Z" itemprop="datePublished">2015-07-19</time>
+  </a>
+</div>
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Hashing/">Hashing</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647。假设存放线程变量的hash表长度为M（通常$M＝2^N$），第K个线程变量在表的位置＝K ＊0x61c88647 ％ M。经过简单地验证，这个hash函数冲突率很低、计算速度很快。本文致力于揭开0x61c88647的神秘面纱。</p>
+<h2 id="Hash">Hash</h2><p>作为查找方法的一种，hash就是通过对变元K进行某种算术运算，计算一个函数h(K)，定位K在表中的位置。最理想的hash函数是$h(k1) \neq h(k2)$，即不同变元K对应不同的位置，相互不冲突。但是，满足这种特征的hash函数非常稀少，我们举两个例子来说明：</p>
+<ol>
+<li><p>将31个元素的集合映射到41个元素的集合中有$41^{31} \approx 10^{50}$种可能的函数，但它们当中仅仅有$ 41 \times 40 \times … \times 11＝41!/10! \approx 10^{43}$个函数能对每一个变元给出不同的值。即大约一千万个函数当中仅仅有一个是适用的</p>
+</li>
+<li><p>生日悖论：在一个23个人的房间里，每个人生日都不重复的概率只有0.4927，即随机把23个变元映射到长度为365的一张表中，不冲突的概率要小于0.5</p>
+</li>
+</ol>
+<h2 id="Fibonacci-黄金比例">Fibonacci-黄金比例</h2><p>定义一个数值：$\phi^{-1} = (\sqrt{5}-1)/2 = 0.6180339887$<br>定义散列函数：$h(k) = \{k \times \phi^{-1}\}$，其中$\{x\}＝x - \lfloor x \rfloor$</p>
+<p>散列函数将整数空间散列到［0，1］空间。如下图所示，这些点被分得很开。事实上，每个新增加的点都落入最大的剩下的区间之一，并且按照黄金比例分割它们。(这个现象最先由J.Oderfeld猜测，并且由S.Swierczkowski证明，FundamentaMath. 46(1958), 187-189)。</p>
+<p><strong>定理</strong>：设$\theta$是任意无理数。当把点$\{\theta\},\{2\theta\},…,\{n\theta\}$放置在线段[0..1]中时，形成点n+1个线段至多有三种不同的长度，并且，下一点$\{(n+1)\theta\}$将落在最大的现存线段之一中。</p>
+<p><img src="http://7xkbqw.com1.z0.glb.clouddn.com/IMG_0324.JPG" alt=""></p>
+<h2 id="Conclusion">Conclusion</h2><p>在ThreadLocal函数中的HASH_INCREASE: $0x61c88647 = (\sqrt(5) - 1) / 2 \times * 2^{32}$，即将所有整数散列到范围[0, $2^{32}-1$]这个范围当中去。</p>
+<p>Reference: The Art of Computer Programming: Volume 3</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hehaiqian.com/2015/07/19/hash1-0x61c88647/" data-id="cica35e4g0003k7s6q59yl51n" class="article-share-link">分享到</a>
+      
+        <a href="http://hehaiqian.com/2015/07/19/hash1-0x61c88647/#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-K-means" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -126,15 +187,15 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/13/K-means/">K-means问题总结</a>
+      <a class="article-title" href="/2015/07/19/K-means/">K-means问题总结</a>
     </h1>
   
 
         <div class="article-meta">
           <div class="article-date">
   <i class="fa fa-calendar"></i>
-  <a href="/2015/07/13/K-means/">
-    <time datetime="2015-07-13T13:11:03.000Z" itemprop="datePublished">2015-07-13</time>
+  <a href="/2015/07/19/K-means/">
+    <time datetime="2015-07-19T06:21:37.000Z" itemprop="datePublished">2015-07-19</time>
   </a>
 </div>
           
@@ -148,7 +209,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>作为最常用的聚类算法之一，K-means容易理解、实现简单，尽管它不能保证全局最优解，但大部分情况下，它的聚类效果都能满足人们的需求。然而，K-means并不是聚类界的全能选手，甚至有时候会表现的很糟糕。</p>
+        <blockquote><p>When averaged across all possible situations, every algorithm performs equally well.</p>
+</blockquote>
+<p>作为最常用的聚类算法之一，K-means容易理解、实现简单，尽管它不能保证全局最优解，但大部分情况下，它的聚类效果都能满足人们的需求。然而，K-means并不是聚类界的全能选手，甚至有时候会表现的很糟糕。</p>
 <p>使用K-means时，我们默认了它的三个前提假设：</p>
 <ul>
 <li>the variance of the distribution of each attribute (variable) is spherical;</li>
@@ -165,19 +228,14 @@
 <p>使用K-means，聚类效果：<br><img src="http://7xkbqw.com1.z0.glb.clouddn.com/different_sizes_kmeans-1.png" alt=""></p>
 <p>从聚类效果可以看出，K-means会使得小的类别数据远离自己的聚类中心！</p>
 <h3 id="Conclusion">Conclusion</h3><p>本文从K-means的假设出发，分析了三种不适合使用K-means的情况。然而，这并不代表K-means在这三种情况下就完全不能使用。我们的目标是使用K-means时，应深刻地认识它的原理、假设条件，以此来更好的帮助我们预处理聚类数据（坐标变换、各维度归一化等），让它表现地更好。</p>
-<p>最后，分享David Post中的两句话，希望你也能深有体会。</p>
-<ul>
-<li>When averaged across all possible situations, every algorithm performs equally well.</li>
-<li>Assumptions are where your power comes from.</li>
-</ul>
 <p>本文参考<a href="http://varianceexplained.org/r/kmeans-free-lunch/" target="_blank" rel="external">David Robinson</a>撰写。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hehaiqian.com/2015/07/13/K-means/" data-id="cic22fcdm0003h84086b7gtsp" class="article-share-link">分享到</a>
+      <a data-url="http://hehaiqian.com/2015/07/19/K-means/" data-id="cica35e4o0006k7s6w51dmbst" class="article-share-link">分享到</a>
       
-        <a href="http://hehaiqian.com/2015/07/13/K-means/#disqus_thread" class="article-comment-link">评论</a>
+        <a href="http://hehaiqian.com/2015/07/19/K-means/#disqus_thread" class="article-comment-link">评论</a>
       
       
     </footer>
@@ -199,7 +257,25 @@
           <li>
             
             <div class="item-thumbnail">
-              <a href="/2015/07/13/K-means/" class="thumbnail">
+              <a href="/2015/07/19/hash1-0x61c88647/" class="thumbnail">
+  
+    <span style="background-image:url(http://7xkbqw.com1.z0.glb.clouddn.com/IMG_0324.JPG
+)" alt="Hash1——为什么是0x61c88647" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/Hashing/">Hashing</a></p>
+              <p class="item-title"><a href="/2015/07/19/hash1-0x61c88647/" class="title">Hash1——为什么是0x61c88647</a></p>
+              <p class="item-date"><time datetime="2015-07-19T07:25:32.000Z" itemprop="datePublished">2015-07-19</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/07/19/K-means/" class="thumbnail">
   
     <span style="background-image:url(http://7xkbqw.com1.z0.glb.clouddn.com/non_spherical-1.png
 )" alt="K-means问题总结" class="thumbnail-image"></span>
@@ -209,8 +285,8 @@
             
             <div class="item-inner">
               <p class="item-category"><a class="article-category-link" href="/categories/Clustering/">Clustering</a></p>
-              <p class="item-title"><a href="/2015/07/13/K-means/" class="title">K-means问题总结</a></p>
-              <p class="item-date"><time datetime="2015-07-13T13:11:03.000Z" itemprop="datePublished">2015-07-13</time></p>
+              <p class="item-title"><a href="/2015/07/19/K-means/" class="title">K-means问题总结</a></p>
+              <p class="item-date"><time datetime="2015-07-19T06:21:37.000Z" itemprop="datePublished">2015-07-19</time></p>
             </div>
           </li>
         
@@ -223,7 +299,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Clustering/">Clustering</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Clustering/">Clustering</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hashing/">Hashing</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -236,7 +312,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -276,6 +352,35 @@
 
 
 <script src="/js/script.js" type="text/javascript"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 
   </div>
 </body>
