@@ -5,20 +5,29 @@
   
   <title>Hash1——为什么是0x61c88647 | Haiqian He</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647。假设存放线程变量的hash表长度为M（通常$M＝2^N$），第K个线程变量在表的位置＝K ＊0x61c88647 ％ M。经过简单地验证，这个hash函数冲突率很低、计算速度很快。本文致力于揭开0x61c88647的神秘面纱。
-Hash作为查找方法的一种，hash就是通过对变元K进行某种算">
+  <meta name="description" content="0x61c88647 = 1640531527
+$2^{31} * (\sqrt(5) - 1)/2 = 2654435769$, as 32 bit unsigned
+$2^{31} * (\sqrt(5) - 1)/2 = -1640531527$, as 32 bit signed
+
+在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hash1——为什么是0x61c88647">
-<meta property="og:url" content="http://hehaiqian.com/2015/07/19/hash1-0x61c88647/index.html">
+<meta property="og:url" content="http://hehaiqian.com/2015/07/25/hash1-0x61c88647/index.html">
 <meta property="og:site_name" content="Haiqian He">
-<meta property="og:description" content="在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647。假设存放线程变量的hash表长度为M（通常$M＝2^N$），第K个线程变量在表的位置＝K ＊0x61c88647 ％ M。经过简单地验证，这个hash函数冲突率很低、计算速度很快。本文致力于揭开0x61c88647的神秘面纱。
-Hash作为查找方法的一种，hash就是通过对变元K进行某种算">
+<meta property="og:description" content="0x61c88647 = 1640531527
+$2^{31} * (\sqrt(5) - 1)/2 = 2654435769$, as 32 bit unsigned
+$2^{31} * (\sqrt(5) - 1)/2 = -1640531527$, as 32 bit signed
+
+在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647">
 <meta property="og:image" content="http://7xkbqw.com1.z0.glb.clouddn.com/IMG_0324.JPG">
-<meta property="og:updated_time" content="2015-07-19T07:25:31.000Z">
+<meta property="og:updated_time" content="2015-07-25T07:49:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hash1——为什么是0x61c88647">
-<meta name="twitter:description" content="在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647。假设存放线程变量的hash表长度为M（通常$M＝2^N$），第K个线程变量在表的位置＝K ＊0x61c88647 ％ M。经过简单地验证，这个hash函数冲突率很低、计算速度很快。本文致力于揭开0x61c88647的神秘面纱。
-Hash作为查找方法的一种，hash就是通过对变元K进行某种算">
+<meta name="twitter:description" content="0x61c88647 = 1640531527
+$2^{31} * (\sqrt(5) - 1)/2 = 2654435769$, as 32 bit unsigned
+$2^{31} * (\sqrt(5) - 1)/2 = -1640531527$, as 32 bit signed
+
+在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647">
   
   
     <link rel="icon" href="favicon.png">
@@ -137,8 +146,8 @@ Hash作为查找方法的一种，hash就是通过对变元K进行某种算">
         <div class="article-meta">
           <div class="article-date">
   <i class="fa fa-calendar"></i>
-  <a href="/2015/07/19/hash1-0x61c88647/">
-    <time datetime="2015-07-19T07:25:32.000Z" itemprop="datePublished">2015-07-19</time>
+  <a href="/2015/07/25/hash1-0x61c88647/">
+    <time datetime="2015-07-25T07:49:28.000Z" itemprop="datePublished">2015-07-25</time>
   </a>
 </div>
           
@@ -152,8 +161,13 @@ Hash作为查找方法的一种，hash就是通过对变元K进行某种算">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647。假设存放线程变量的hash表长度为M（通常$M＝2^N$），第K个线程变量在表的位置＝K ＊0x61c88647 ％ M。经过简单地验证，这个hash函数冲突率很低、计算速度很快。本文致力于揭开0x61c88647的神秘面纱。</p>
-<h2 id="Hash">Hash</h2><p>作为查找方法的一种，hash就是通过对变元K进行某种算术运算，计算一个函数h(K)，定位K在表中的位置。最理想的hash函数是$h(k1) \neq h(k2)$，即不同变元K对应不同的位置，相互不冲突。但是，满足这种特征的hash函数非常稀少，我们举两个例子来说明：</p>
+        <ol>
+<li>0x61c88647 = 1640531527</li>
+<li>$2^{31} * (\sqrt(5) - 1)/2 = 2654435769$, as 32 bit unsigned</li>
+<li>$2^{31} * (\sqrt(5) - 1)/2 = -1640531527$, as 32 bit signed</li>
+</ol>
+<p>在Java ThreadLocal类中有一个“奇怪”的数字用于线程变量的hash，它就是0x61c88647。假设存放线程变量的hash表长度为M（通常$M＝2^N$），第K个线程变量在表的位置＝K ＊0x61c88647 ％ M。经过简单地验证，这个hash函数冲突率很低、计算速度很快。本文致力于揭开0x61c88647的神秘面纱。</p>
+<h2 id="Hash">Hash</h2><p>作为查找方法的一种，hash就是通过对变元K进行某种算术运算，计算一个函数h(K)，定位K在表中的位置。最理想的hash函数是if $k1 \neq k2$, then $h(k1) \neq h(k2)$，即不同变元K对应不同的位置，相互不冲突。但是，满足这种特征的hash函数非常稀少，我们举两个例子来说明：</p>
 <ol>
 <li><p>将31个元素的集合映射到41个元素的集合中有$41^{31} \approx 10^{50}$种可能的函数，但它们当中仅仅有$ 41 \times 40 \times … \times 11＝41!/10! \approx 10^{43}$个函数能对每一个变元给出不同的值。即大约一千万个函数当中仅仅有一个是适用的</p>
 </li>
@@ -164,15 +178,15 @@ Hash作为查找方法的一种，hash就是通过对变元K进行某种算">
 <p>散列函数将整数空间散列到［0，1］空间。如下图所示，这些点被分得很开。事实上，每个新增加的点都落入最大的剩下的区间之一，并且按照黄金比例分割它们。(这个现象最先由J.Oderfeld猜测，并且由S.Swierczkowski证明，FundamentaMath. 46(1958), 187-189)。</p>
 <p><strong>定理</strong>：设$\theta$是任意无理数。当把点$\{\theta\},\{2\theta\},…,\{n\theta\}$放置在线段[0..1]中时，形成点n+1个线段至多有三种不同的长度，并且，下一点$\{(n+1)\theta\}$将落在最大的现存线段之一中。</p>
 <p><img src="http://7xkbqw.com1.z0.glb.clouddn.com/IMG_0324.JPG" alt=""></p>
-<h2 id="Conclusion">Conclusion</h2><p>在ThreadLocal函数中的HASH_INCREASE: $0x61c88647 = (\sqrt(5) - 1) / 2 \times * 2^{32}$，即将所有整数散列到范围[0, $2^{32}-1$]这个范围当中去。</p>
+<h2 id="Conclusion">Conclusion</h2><p>在ThreadLocal函数中的HASH_INCREASE = $0x61c88647 = (\sqrt(5) - 1) / 2 \times * 2^{31}$，即将整数尽可能均匀地散列到[0, $2^{32}-1$]这个范围当中去。</p>
 <p>Reference: The Art of Computer Programming: Volume 3</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hehaiqian.com/2015/07/19/hash1-0x61c88647/" data-id="cica62z7d0003rls6gg5iwrm0" class="article-share-link">分享到</a>
+      <a data-url="http://hehaiqian.com/2015/07/25/hash1-0x61c88647/" data-id="cica63nf70003s0s6df5d158g" class="article-share-link">分享到</a>
       
-        <a href="http://hehaiqian.com/2015/07/19/hash1-0x61c88647/#disqus_thread" class="article-comment-link">评论</a>
+        <a href="http://hehaiqian.com/2015/07/25/hash1-0x61c88647/#disqus_thread" class="article-comment-link">评论</a>
       
       
     </footer>
@@ -211,7 +225,7 @@ Hash作为查找方法的一种，hash就是通过对变元K进行某种算">
           <li>
             
             <div class="item-thumbnail">
-              <a href="/2015/07/19/hash1-0x61c88647/" class="thumbnail">
+              <a href="/2015/07/25/hash1-0x61c88647/" class="thumbnail">
   
     <span style="background-image:url(http://7xkbqw.com1.z0.glb.clouddn.com/IMG_0324.JPG
 )" alt="Hash1——为什么是0x61c88647" class="thumbnail-image"></span>
@@ -221,8 +235,8 @@ Hash作为查找方法的一种，hash就是通过对变元K进行某种算">
             
             <div class="item-inner">
               <p class="item-category"><a class="article-category-link" href="/categories/Hashing/">Hashing</a></p>
-              <p class="item-title"><a href="/2015/07/19/hash1-0x61c88647/" class="title">Hash1——为什么是0x61c88647</a></p>
-              <p class="item-date"><time datetime="2015-07-19T07:25:32.000Z" itemprop="datePublished">2015-07-19</time></p>
+              <p class="item-title"><a href="/2015/07/25/hash1-0x61c88647/" class="title">Hash1——为什么是0x61c88647</a></p>
+              <p class="item-date"><time datetime="2015-07-25T07:49:28.000Z" itemprop="datePublished">2015-07-25</time></p>
             </div>
           </li>
         
