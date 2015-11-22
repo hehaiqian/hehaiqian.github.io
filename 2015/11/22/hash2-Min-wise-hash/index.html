@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tags | Haiqian He</title>
+  <title>Hash2 — Min Hash（min-wise independent permutation）及其实现 | Haiqian He</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Hexo theme - Icarus">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tags">
-<meta property="og:url" content="http://hehaiqian.com/tags/index.html">
+  <meta name="description" content="Jaccard similarity假设我们有两个64-bit的整数集合A和B（其实任何类型的集合都可以通过hash函数变换为整数集合），我们用Jaccard距离来度量两个集合的相似性：\begin{equation}J(A, B) = \frac{A \bigcap B}{A \bigcup B}\end{equation}对于两个不相交的集合，Jaccard相似度为0；对于两个相同的集合，Ja">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hash2 — Min Hash（min-wise independent permutation）及其实现">
+<meta property="og:url" content="http://hehaiqian.com/2015/11/22/hash2-Min-wise-hash/index.html">
 <meta property="og:site_name" content="Haiqian He">
-<meta property="og:description" content="Hexo theme - Icarus">
-<meta property="og:updated_time" content="2015-07-12T03:35:07.000Z">
+<meta property="og:description" content="Jaccard similarity假设我们有两个64-bit的整数集合A和B（其实任何类型的集合都可以通过hash函数变换为整数集合），我们用Jaccard距离来度量两个集合的相似性：\begin{equation}J(A, B) = \frac{A \bigcap B}{A \bigcup B}\end{equation}对于两个不相交的集合，Jaccard相似度为0；对于两个相同的集合，Ja">
+<meta property="og:updated_time" content="2015-11-22T02:52:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tags">
-<meta name="twitter:description" content="Hexo theme - Icarus">
+<meta name="twitter:title" content="Hash2 — Min Hash（min-wise independent permutation）及其实现">
+<meta name="twitter:description" content="Jaccard similarity假设我们有两个64-bit的整数集合A和B（其实任何类型的集合都可以通过hash函数变换为整数集合），我们用Jaccard距离来度量两个集合的相似性：\begin{equation}J(A, B) = \frac{A \bigcap B}{A \bigcup B}\end{equation}对于两个不相交的集合，Jaccard相似度为0；对于两个相同的集合，Ja">
   
   
     <link rel="icon" href="favicon.png">
@@ -117,14 +117,82 @@
   </div>
 </aside>
       
-      <section id="main"><section class="layout-wrap">
-  <div class="layout-title">
-    <span>Tags</span>
-  </div>
-  <div class="layout-wrap-inner tag-cloud">
+      <section id="main"><article id="post-hash2-Min-wise-hash" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hash2 — Min Hash（min-wise independent permutation）及其实现
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/11/22/hash2-Min-wise-hash/">
+    <time datetime="2015-11-22T02:52:01.000Z" itemprop="datePublished">2015-11-22</time>
+  </a>
+</div>
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/Hashing/">Hashing</a>
   </div>
-</section></section>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Jaccard_similarity">Jaccard similarity</h2><p>假设我们有两个64-bit的整数集合A和B（其实任何类型的集合都可以通过hash函数变换为整数集合），我们用Jaccard距离来度量两个集合的相似性：<br>\begin{equation}<br>J(A, B) = \frac{A \bigcap B}{A \bigcup B}<br>\end{equation}<br>对于两个不相交的集合，Jaccard相似度为0；对于两个相同的集合，Jaccard相似度为1。</p>
+<p>我们的目标是不用相似函数定义中的交集、并集的操作（慢），快速计算J(A,B)。一个典型的场景：已知一亿个集合，当新来一个集合X时，如何快速判断X与已知集合的相似度是否超过阈值T（搜索引擎每爬取一个新网页都需要判断这个新页面是否与某个老页面相似，以免重复索引）。</p>
+<p>设h是一个hash函数，它可以将所有64-bit的数字全排列（全排列hash是指：所有数字被h映射到一个新的位置，不同数字的位置不同）。对于集合S，$h_{min}(S)$表示集合S经过h映射后的最小值。现在我们将$h_{min}$作用于集合A和B，得到<br>\begin{equation}<br>P(h_{min}(A) = h_{min}(B)) = J(A,B)<br>\end{equation}<br>这个等式可以这样理解：$h_{min}(A)$和$h_{min}(B)$的所有元素都是由集合${A \bigcup B}$中的元素映射而来，其中满足$h_{min}(A) = h_{min}(B)$条件的所有元素则都是由集合$A \bigcap B$中的元素映射而来。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hehaiqian.com/2015/11/22/hash2-Min-wise-hash/" data-id="cihar1ugg0004kw40pw03x9d8" class="article-share-link">分享到</a>
+      
+        <a href="http://hehaiqian.com/2015/11/22/hash2-Min-wise-hash/#disqus_thread" class="article-comment-link">评论</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/22/how-google-works/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          how-google-works
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/25/hash1-0x61c88647/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hash1 — 为什么是0x61c88647</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
       
         <aside id="sidebar">
   
